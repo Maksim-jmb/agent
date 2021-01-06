@@ -8,4 +8,4 @@ If you are not running the game in C:  you might have to change some includes.
 Should be able to switch window layouts on the fly - without restarting.  Just have horizontal, vertical, and a sample custom - VFX I left out... you could add more customs or call them what you want.  My Custom layout is based off of 2 monitors 2560,1080 and 1920,1080...change according to your monitor layout
 
 Hopefully you can just swap out the Agents folder and this will work - settings.json holds the layouts and LGUI2's: change as needed, and bwl.config is only a test file.
-LGUI's if you close a window - reload should bring it back....as of now if you hit RELOAD a ton of times----you will have a ton of windows built up behind main window!!! 
+LGUI's if you close a window - reload should bring it back....as of now if you hit RELOAD a ton of times----you will have a ton of windows built up behind main window!!! I think - just using visible/hide for now to show them.
