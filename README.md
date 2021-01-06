@@ -1,7 +1,9 @@
 # agent
 simple GUI and Layout profiles for jmb
 
-not cleaned up - adapted another agent into current Basic as of 1/5/2021 after catching a comment on discord for gui and layout.  Templates got messed up switching things into Basic, didn't take that much time with it - just added a couple skin files to make it workable.  Tested it a little - seems to work
+not cleaned up - adapted another agent into current Basic as of 1/5/2021 after catching a comment on discord for gui and layout.  Templates got messed up switching things into Basic, didn't take that much time with it - just added a couple skin files to make it workable. Colors are all listed at the top of the skins files if you want to change colors.
+
+Tested it a little - seems to work
 
 If you are not running the game in C:  you might have to change some includes.
 
