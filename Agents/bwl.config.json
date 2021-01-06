@@ -1,0 +1,7 @@
+{
+  "launchSlots":4,
+  "useGame":"WoW Retail",
+  "agents":"[{\"name\":\"Basic Global Hotkeys\"},{\"name\":\"Basic Performance\"},{\"name\":\"Basic Round-Robin\"},{\"name\":\"Basic Window Layout\"},{\"name\":\"Reload\"}]",
+  "layouts":"[{\"layout\":\"Horizontal\"},{\"layout\":\"Vertical\"},{\"layout\":\"Custom\"},{\"layout\":\"Vfx3\"},{\"layout\":\"Vfx5\"}]",
+  "uselayout":null
+}

@@ -1,0 +1,17 @@
+{
+    "$schema": "http://www.lavishsoft.com/schema/lgui2Package.json",    
+    "elements": [
+        {
+            "type": "window",
+            "name": "basicPerformance.window",
+            "title": "Basic Performance",
+            "visibility":"hidden",
+            "horizontalAlignment":"left",
+            "verticalAlignment":"bottom",
+            "strata":1.1,
+            "width":200,
+            "height":100,
+            "content":"Work in progress"       
+        }
+    ]
+}

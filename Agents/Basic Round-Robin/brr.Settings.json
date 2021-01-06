@@ -1,0 +1,103 @@
+{
+  "profiles":{
+    "default":{
+      "name":"default",
+      "includeMouse":false,
+      "overrides":{
+        "F12":{
+          "ignore":true
+        },
+        "Shift":{
+          "ignore":true
+        },
+        "Right Shift":{
+          "ignore":true
+        },
+        "Ctrl":{
+          "ignore":true
+        },
+        "Right Ctrl":{
+          "ignore":true
+        },
+        "Alt":{
+          "ignore":true
+        },
+        "Right Alt":{
+          "ignore":true
+        },
+        "- Press buttons here to add overrides -":{
+          "ignore":true
+        }
+      },
+      "defaultAllow":true,
+      "switchAsHotkey":true,
+      "hotkey":{
+        "controls":"F12"
+      }
+    },
+    "Heals":{
+      "name":"Heals",
+      "includeMouse":false,
+      "overrides":{
+        "F12":{
+          "ignore":true
+        },
+        "Shift":{
+          "ignore":true
+        },
+        "Right Shift":{
+          "ignore":true
+        },
+        "Ctrl":{
+          "ignore":true
+        },
+        "Right Ctrl":{
+          "ignore":true
+        },
+        "Alt":{
+          "ignore":true
+        },
+        "Right Alt":{
+          "ignore":true
+        }
+      },
+      "defaultAllow":true,
+      "switchAsHotkey":true,
+      "hotkey":{
+        "controls":"F12"
+      }
+    },
+    "Party":{
+      "name":"Party",
+      "includeMouse":false,
+      "overrides":{
+        "F12":{
+          "ignore":true
+        },
+        "Shift":{
+          "ignore":true
+        },
+        "Right Shift":{
+          "ignore":true
+        },
+        "Ctrl":{
+          "ignore":true
+        },
+        "Right Ctrl":{
+          "ignore":true
+        },
+        "Alt":{
+          "ignore":true
+        },
+        "Right Alt":{
+          "ignore":true
+        }
+      },
+      "defaultAllow":true,
+      "switchAsHotkey":true,
+      "hotkey":{
+        "controls":"F12"
+      }
+    }
+  }
+}

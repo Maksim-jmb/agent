@@ -1,0 +1,141 @@
+{
+  "launchSlots":4,
+  "useGame":"WoW Retail",
+  "agents": [
+    
+    {
+      "name":"Basic Global Hotkeys"
+    },
+    {
+      "name":"Basic Performance"
+    },
+    {
+      "name":"Basic Round-Robin"
+    },
+    {
+      "name":"Basic Window Layout"
+    },
+    {
+      "name":"Reload"
+    }
+  ],
+  "layouts": [
+    {
+      "layout":"Horizontal"
+    },
+    {
+      "layout":"Vertical"
+    },
+    {
+      "layout":"Custom"
+    },
+    {
+      "layout":"Vfx3"
+    },
+    {
+      "layout":"Vfx5"
+    }
+  ],
+  "uselayout":[
+    {
+      "use":"Horizontal"
+    }
+  ],
+  "profiles":{
+    "melee":{
+      "name":"melee",
+      "includeMouse":false,
+      "overrides":{
+        "4":{
+          "allow":true
+        },
+        "5":{
+          "allow":true
+        },
+        "6":{
+          "allow":true
+        },
+        "F10":{
+          "allow":true
+        },
+        "Num *":{
+          "allow":true
+        }
+      },
+      "defaultAllow":false,
+      "switchAsHotkey":true,
+      "hotkey":{
+        "controls":"F10"
+      }
+    },
+    "mouse2":{
+      "name":"mouse2",
+      "includeMouse":true,
+      "overrides":{
+        "Mouse2":{
+          "allow":true
+        },
+        "F12":{
+          "allow":true
+        }
+      },
+      "defaultAllow":false,
+      "switchAsHotkey":true,
+      "hotkey":{
+        "controls":"F12"
+      }
+    },
+    "party":{
+      "name":"party",
+      "includeMouse":false,
+      "overrides":{
+        "4":{
+          "allow":true
+        },
+        "5":{
+          "allow":true
+        },
+        "6":{
+          "allow":true
+        },
+        "F9":{
+          "allow":true
+        },
+        "Num *":{
+          "allow":true
+        }
+      },
+      "defaultAllow":false,
+      "switchAsHotkey":true,
+      "hotkey":{
+        "controls":"F9"
+      }
+    },
+    "ranged":{
+      "name":"ranged",
+      "includeMouse":false,
+      "overrides":{
+        "4":{
+          "allow":true
+        },
+        "5":{
+          "allow":true
+        },
+        "6":{
+          "allow":true
+        },
+        "F11":{
+          "allow":true
+        },
+        "Num *":{
+          "allow":true
+        }
+      },
+      "defaultAllow":false,
+      "switchAsHotkey":true,
+      "hotkey":{
+        "controls":"F11"
+      }
+    }
+  }
+}

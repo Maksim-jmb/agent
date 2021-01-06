@@ -1,0 +1,634 @@
+{
+    "$schema": "http://www.lavishsoft.com/schema/lgui2Package.json", 
+    "brushes":{
+        "white":{"color":"#FFFFFFFF"},
+        "dimwhite":{"color":"#FFF0F0F0"},
+        "dimmerwhite":{"color":"#FFE6E6E6"},
+        "black":{"color":"#FF000000"},
+        "grey":{"color":"#FF3C3C3C"},
+        "lightgrey":{"color":"#FF787878"},
+        "yellow":{"color":"#FFFFFF00"},
+        "darkblue":{"color":"#FF000032"},
+        "blue":{"color":"#FF002850"},
+        "lightblue":{"color":"#FF3C78C8"},
+        "brightblue":{"color":"#FF0000FF"},
+        "greyblue":{"color":"#C83C5064"},
+        "darkgreen":{"color":"#FF003C00"},
+        "green":{"color":"#FF006644"},
+        "lightgreen":{"color":"#FF64C8A0"}
+    },
+    "templates":{
+        "button":{
+            "color":"#FFE6E6E6",
+            "padding": [8,5,8,5],
+            "borderThickness": 2,
+            "borderRounding":1,
+            "borderBrush": {
+                "color":"#FFE6E6E6"
+            },
+            "backgroundBrush": {
+                "color":"#FF000032"
+            },
+            "styles": {
+                "onVisualPress": {
+                    "borderBrush": {
+                        "color":"#FFFFFFFF"
+                    },
+                    "backgroundBrush": {
+                        "color":"#FFF0F0F0"
+                    }
+                },
+                "onVisualRelease": {
+                    "borderBrush": {
+                        "color":"#FFE6E6E6"
+                    },
+                    "backgroundBrush": {
+                        "color":"#FF003C00"
+                    }
+                },
+                "gotMouseOver": {
+                    "color":"#FFFFFFFF",
+                    "backgroundBrush": {
+                        "color":"#FF003C00"
+                    },
+                    "borderBrush": {
+                        "color":"#FFFFFFFF"
+                    }
+                },
+                "lostMouseOver": {
+                    "color":"#FFF0F0F0",
+                    "borderBrush": {
+                        "color":"#FFE6E6E6"
+                    },
+                    "backgroundBrush": {
+                        "color":"#FF000032"
+                    }
+                }
+            }
+        },
+        "checkbox": {
+            "contentContainer": {
+                "jsonTemplate":"checkbox.contentContainer"
+            }
+        },
+        "checkbox.check":{      
+            "jsonTemplate":"textblock",
+            "type": "textblock",
+            "text": "☐",
+            "font": {
+                "height": 24
+            },
+            "padding": [3,0,3,0],
+            "hooks": {
+                "onUnchecked": {
+                "elementType": "checkbox",
+                "event": "onUnchecked",
+                "eventHandler": {
+                    "type": "style",
+                    "styleName": "onUnchecked"
+                }
+            },
+            "onChecked": {
+                "elementType": "checkbox",
+                "event": "onChecked",
+                "eventHandler": {
+                    "type": "style",
+                    "styleName": "onChecked"
+                }
+            },
+            "onIndeterminate": {
+                "elementType": "checkbox",
+                "event": "onIndeterminate",
+                "eventHandler": {
+                    "type": "style",
+                    "styleName": "onIndeterminate"
+                }
+            }
+            },
+            "styles": {
+                "onUnchecked": {
+                    "text": "☐"
+                },
+                "onChecked": {
+                    "text": "☑"
+                },
+                "onIndeterminate": {
+                    "text": "▣"
+                }
+            }      
+        },
+        "checkbox.contentContainer":{
+            "jsonTemplate":"stackpanel",
+            "type": "stackpanel",
+            "acceptsMouseFocus": false,
+            "orientation": "horizontal",
+            "children": [
+                {
+                    "jsonTemplate":"checkbox.check"
+                }
+            ]
+        },
+        "combobox": {
+            "type": "combobox",
+            "selectedItemViewTemplate": "comboboxselection",
+            "color":"#FFF0F0F0",
+            "margin":[20,0,20,0],
+            "padding":[25,5,25,5],
+            "borderThickness":1,
+            "borderRounding":1,
+            "borderBrush":{
+                "color":"#FF000032"
+            },
+            "backgroundBrush": {
+                "color": "#FF000000"
+            },
+            "styles": {
+                "gotMouseOver": {
+                    "color":"#FFE6E6E6",
+                    "borderBrush":{
+                        "color":"#FFE6E6E6"
+                    },
+                    "backgroundBrush": {
+                        "color":"#FF787878"
+                    }
+                },
+                "lostMouseOver": {
+                    "color":"#FFF0F0F0",
+                    "borderBrush": {
+                        "color":"#FF000032"
+                    },
+                    "backgroundBrush": {
+                        "color":"#FF000032"
+                    }
+                }
+            },
+            "hooks": {
+                "onListBoxItemMouseButtonMove": {
+                    "elementType": "listbox",
+                    "event": "onItemMouseButtonMove",
+                    "flags": "descendant",
+                    "eventHandler": {
+                        "type": "forward",
+                        "flags": "self",
+                        "event": "onListBoxItemMouseButtonMove"
+                    }
+                }
+            },
+            "eventHandlers":{
+                "onMouseButtonMove":{
+                    "type": "forward",
+                    "flags": "self",
+                    "event": "onPopupButtonMouseButtonMove"
+                }
+            },
+            "popup": {
+                "jsonTemplate": "combobox.popup"
+            },
+            "headerContainer":{
+                "type":"panel",
+                "verticalAlignment": "center"
+            }
+        },
+        "combobox.popup": {
+            "type": "popup",
+            "jsonTemplate": "popup",
+            "contentContainer":{
+                "jsonTemplate":"popup.panel",
+                "type":"anchor",
+                "anchorToElement":{
+                    "elementType":"combobox",
+                    "elementTree":"logical",
+                    "flags":"ancestor"
+                },
+                "clipToParent":false,
+                "anchorLocationFactor":[0.0,1.0]
+            },
+            "content": {
+                "type": "listbox",
+                "padding":[20,4,4,4],
+                "eventHandlers": {
+                    "onItemSelected": {
+                        "type": "forward",
+                        "elementType": "combobox",
+                        "event": "onListBoxItemSelected"
+                    },
+                    "onItemDeselected": {
+                        "type": "forward",
+                        "elementType": "combobox",
+                        "event": "onListBoxItemDeselected"
+                    },
+                    "onSelectionChanged": {
+                        "type": "forward",
+                        "elementType": "combobox",
+                        "event": "onListBoxSelectionChanged"
+                    }
+                }
+            }
+        },
+        "comboboxselection": {
+            "jsonTemplate":"itemview",
+            "itemAs":"child",
+            "verticalAlignment":"center",
+            "eventHandlers": {
+            }
+        },
+        "itemview": {
+            "type": "itemview",
+            "color":"#FFF0F0F0",
+            "acceptsKeyboardFocus": false,
+            "minSize":[100,10],
+            "borderThickness":2,
+            "borderRounding":1,
+            "borderBrush":{
+                "color":"#FF000032"
+            },
+            "font":{
+                "bold":true
+            },
+            "eventHandlers": {
+                "onMouseButtonMove": {
+                    "type": "forward",
+                    "elementType": "itemlist",
+                    "event": "onItemMouseButtonMove"
+                }
+            },
+            "styles": {
+                "onMouseButtonMove": {
+                    "borderBrush":{
+                        "color":"#FF3C78C8"
+                    },
+                    "backgroundBrush": {
+                        "color": "#FF3C78C8"
+                    }
+                },
+                "lostMouseFocus": {
+                    "borderBrush":{
+                        "color":"#FF000032"
+                    },
+                    "backgroundBrush": {
+                        "color": "#FF000032"
+                    }
+                },
+                "onSelected": {
+                    "color":"#FFFFFF00"
+                },
+                "onDeselected": {
+                    "backgroundBrush": {
+                        "color": "#FF000032"
+                    },
+                    "color":"#FFF0F0F0"
+                }
+            }
+        },
+        "itemview2": {
+            "type": "itemview",
+            "color":"#FFF0F0F0",
+            "acceptsKeyboardFocus": false,
+            "borderThickness":2,
+            "borderRounding":1,
+            "borderBrush":{
+                "color":"#FF002850"
+            },
+            "eventHandlers": {
+                "onMouseButtonMove": {
+                    "backgroundBrush": {
+                        "color": "#FF64C8A0"
+                    },
+                    "type": "forward",
+                    "elementType": "itemlist",
+                    "event": "onItemMouseButtonMove"
+                }
+            },
+            "styles": {
+                "gotMouseOver": {
+                    "backgroundBrush": {
+                        "color": "#FF002850"
+                    }
+                },
+                "lostMouseFocus": {
+                    "backgroundBrush": {
+                        "color": "#FF000032"
+                    }
+                },
+                "onSelected": {
+                    "backgroundBrush": {
+                        "color": "#FF3C78C8"
+                    }
+                },
+                "onDeselected": {
+                    "backgroundBrush": {
+                        "color": "#FF000032"
+                    }
+                }
+            }
+        },
+        "itemview.textblock": {
+            "type": "textblock"
+        },
+        "listbox": {
+            "defaultItemViewTemplate": "listboxitem",
+            "font":{
+                "heightFactor":1.5
+            },
+            "borderThickness": 2,
+            "borderRounding":1,
+            "borderBrush": {
+                "color": "#FFE6E6E6"
+            },
+            "contentContainer": {
+                "jsonTemplate":"listbox.contentContainer"        
+            },
+            "content": {
+                "type": "stackpanel",
+                "horizontalContentAlignment":"left",
+                "backgroundBrush": { "color": "#FF000032" }
+            }
+        },
+        "listbox2": {
+            "defaultItemViewTemplate": "listboxitem",
+            "font":{
+                "heightFactor": 2
+            },
+            "borderThickness": 2,
+            "borderRounding":1,
+            "borderBrush": {
+                "color": "#FFE6E6E6"
+            },
+            "contentContainer": {
+                "jsonTemplate":"listbox.contentContainer"        
+            },
+            "content": {
+                "type": "stackpanel",
+                "backgroundBrush": { "color": "#FF000032" }
+            }
+        },
+        "listbox.contentContainer.": {
+            "jsonTemplate": "scrollviewer",
+            "type": "scrollviewer",
+            "acceptsMouseFocus": false,
+            "contentContainer": {
+                "type": "border",
+                "verticalContentAlignment": "stretch"
+            }
+        },
+        "listboxitem": {
+            "jsonTemplate": "itemview",
+            "backgroundBrush": {
+                "color": "#FF000032"
+            }
+        },
+        "listboxitem2": {
+            "jsonTemplate": "itemview2",
+            "minSize":[260,20],
+            "margin": [10,4,0,4],
+            "padding":[0,4,60,4],
+            "backgroundBrush": {
+                "color": "#FF000032"
+            },
+            "styles": {
+                "onMouseMove": {
+                    "backgroundBrush": {
+                        "color": "#FF000032"
+                    }
+                },
+                "lostMouseFocus": {
+                    "backgroundBrush": {
+                        "color": "#FF000032"
+                    }
+                }
+            }
+        },
+        "popup": {
+            "type": "popup",
+            "strata": 1.1,
+            "acceptsMouseFocus": false,
+            "padding":[40,4,4,4],
+            "contentContainer": {
+                "jsonTemplate": "popup.panel"
+            },
+            "hooks": {
+                "onScreenRenderedChildren": {
+                    "elementType": "screen",
+                    "event": "onRenderedChildren",
+                    "flags": "ancestor",
+                    "eventHandler": {
+                        "type": "forward",
+                        "flags": "self",
+                        "event": "onScreenRenderedChildren"
+                    }
+                }
+            }
+        },
+        "popup.panel": {
+            "type": "panel",
+            "acceptsMouseFocus": false,
+            "borderThickness": 3,
+            "borderRounding":1,
+            "borderBrush": {
+                "color": "#FF000000"
+            },
+            "backgroundBrush": {
+                "color": "#FF000032"
+            }
+        },
+        "scrollbar": {
+            "type": "scrollbar",
+            "borderThickness": 1,
+            "borderBrush":{
+                "color":"#FFFFFF00"
+            },
+            "increment": 3
+          },
+        "scrollbarHorizontal": {
+            "jsonTemplate": "scrollbar",
+            "height": 16,
+            "font": {
+              "face": "Arial",
+              "height": 8,
+              "fixed": false,
+              "bold": false
+            },
+            "fromEdge": "left",
+            "decButton": {
+              "type": "button",
+              "_dock": "left",
+              "content": {
+                "type": "textblock",
+                "horizontalAlignment": "center",
+                "verticalAlignment": "center",
+                "text": "◀"
+              },
+              "contentContainer": {
+                "type": "panel",
+                "acceptsMouseFocus": false,
+                "horizontalAlignment": "stretch",
+                "verticalAlignment": "stretch"
+              },
+              "height": 16,
+              "width": 16,
+              "padding": 0,
+              "eventHandlers": {
+                "onMouseButtonMove": {
+                  "type": "forward",
+                  "elementType": "scrollbar",
+                  "event": "onDecMouseButtonMove"
+                }
+              }
+            },
+            "incButton": {
+              "type": "button",
+              "_dock": "right",
+              "content": {
+                "type": "textblock",
+                "horizontalAlignment": "center",
+                "verticalAlignment": "center",
+                "text": "▶"
+              },
+              "contentContainer": {
+                "type": "panel",
+                "acceptsMouseFocus": false,
+                "horizontalAlignment": "stretch",
+                "verticalAlignment": "stretch"
+              },
+              "height": 16,
+              "width": 16,
+              "padding": 0,
+              "eventHandlers": {
+                "onMouseButtonMove": {
+                  "type": "forward",
+                  "elementType": "scrollbar",
+                  "event": "onIncMouseButtonMove"
+                }
+              }
+            },
+            "slider": {
+              "type": "slider",
+              "_dock": "left",
+              "fromEdge": "left",
+              "horizontalAlignment": "stretch",
+              "height": 16,
+              "handle": {
+                "height": 16,
+                "width": 16
+              },
+              "eventHandlers": {
+                "onValueChanged": {
+                  "type": "forward",
+                  "elementType": "scrollbar",
+                  "event": "onValueChanged"
+                }
+              }
+            }
+          },
+          "scrollbarVertical": {
+            "jsonTemplate": "scrollbar",
+            "width": 16,
+            "fromEdge": "top",
+            "font": {
+              "face": "Arial",
+              "height": 8,
+              "fixed": false,
+              "bold": false
+            },
+            "incButton": {
+              "type": "button",
+              "_dock": "top",
+              "content": {
+                "type": "textblock",
+                "horizontalAlignment": "center",
+                "verticalAlignment": "center",
+                "text": "▲"
+              },
+              "contentContainer": {
+                "type": "panel",
+                "acceptsMouseFocus": false,
+                "horizontalAlignment": "stretch",
+                "verticalAlignment": "stretch"
+              },
+              "height": 16,
+              "width": 16,
+              "padding": 0,
+              "eventHandlers": {
+                "onMouseButtonMove": {
+                  "type": "forward",
+                  "elementType": "scrollbar",
+                  "event": "onDecMouseButtonMove"
+                }
+              }
+            },
+            "decButton": {
+              "type": "button",
+              "_dock": "bottom",
+              "content": {
+                "type": "textblock",
+                "horizontalAlignment": "center",
+                "verticalAlignment": "center",
+                "text": "▼"
+              },
+              "contentContainer": {
+                "type": "panel",
+                "acceptsMouseFocus": false,
+                "horizontalAlignment": "stretch",
+                "verticalAlignment": "stretch"
+              },
+              "height": 16,
+              "width": 16,
+              "padding": 0,
+              "eventHandlers": {
+                "onMouseButtonMove": {
+                  "type": "forward",
+                  "elementType": "scrollbar",
+                  "event": "onIncMouseButtonMove"
+                }
+              }
+            },
+            "slider": {
+              "type": "slider",
+              "_dock": "top",
+              "verticalAlignment": "stretch",
+              "fromEdge": "top",
+              "width": 16,
+              "handle": {
+                "height": 16,
+                "width": 16
+              },
+              "eventHandlers": {
+                "onValueChanged": {
+                  "type": "forward",
+                  "elementType": "scrollbar",
+                  "event": "onValueChanged"
+                }
+              }
+            }
+          },
+        "scrollviewer": {
+            "contentContainer": {
+                "type": "border",
+                "horizontalContentAlignment": "left",
+                "verticalContentAlignment": "none"
+            },
+            "horizontalBar": {
+              "jsonTemplate": "scrollbarHorizontal",
+              "eventHandlers": {
+                "onValueChanged": {
+                  "type": "forward",
+                  "elementType": "scrollviewer",
+                  "event": "onHorizontalValueChanged"
+                }
+              }
+            },
+            "verticalBar": {
+              "jsonTemplate": "scrollbarVertical",
+              "eventHandlers": {
+                "onValueChanged": {
+                  "type": "forward",
+                  "elementType": "scrollviewer",
+                  "event": "onVerticalValueChanged"
+                }
+              }
+            },
+            "horizontalScroll": "auto",
+            "verticalScroll": "auto"
+        }
+    }
+}

@@ -1,0 +1,497 @@
+{
+    "$schema": "http://www.lavishsoft.com/schema/lgui2Package.json",
+    "includes":["C:\\Program Files (x86)\\Joe Multiboxer\\Agents\\blSkin.lgui2package.json"],
+        
+    "templates":{
+        "BasicLauncher.gameView":{
+            "jsonTemplate":"listboxitem",
+            "padding":2,
+            "content":{
+                "type":"textblock",
+                "textBinding":{
+                    "pullFormat":"${LGUI2.DataBindingContext.Locate[\"\",itemview,ancestor].Item.Data.Get[display_name]}",
+                    "pullReplaceNull":""
+                }
+            }
+        },
+        "BasicLauncher.agentView":{
+            "jsonTemplate":"listboxitem2",
+            "padding":2,
+            "content":{
+                "type":"textblock",
+                "minSize":[260,20],
+                "margin":[2,4,2,4],
+                "padding": [10,2,5,2],
+                "textBinding":{
+                    "pullFormat":"${LGUI2.DataBindingContext.Locate[\"\",itemview,ancestor].Item.Data.Get[name]}",
+                    "pullReplaceNull":""
+                }
+            }
+        },
+        "BasicLauncher.layoutView":{
+            "jsonTemplate":"listboxitem2",
+            "padding":2,
+            "content":{
+                "type":"textblock",
+                "minSize":[260,20],
+                "margin":[2,4,2,4],
+                "padding": [10,2,5,2],
+                "textBinding":{
+                    "pullFormat":"${LGUI2.DataBindingContext.Locate[\"\",itemview,ancestor].Item.Data.Get[layout]}",
+                    "pullReplaceNull":""
+                }
+            }
+        },
+        "window1":{
+            "titleBar":{
+                "type":"dockpanel",
+                "orientation":"horizontal",
+                "widthFactor":1,
+                "height":46,
+                "borderThickness":3,
+                "borderRounding":1,
+                "borderBrush":{
+                    "color":"#FF3C3C3C"
+                },
+                "backgroundBrush":{
+                    "color":"#FF000032"
+                },
+                "font":{
+                    "face":"Tahoma",
+                    "bold":true,
+                    "height":25
+                },
+                
+                "children":[
+                    {
+                        "type":"combobox",
+                        "jsonTemplate":"combobox",
+                        "verticalAlignment":"center",
+                        "content":"Agents",
+                        "backgroundBrush":{
+                            "color":"#FF000032"
+                        },
+                        "itemsBinding": {
+                            "pullFormat": "${BasicLauncher.Agents1.AsJSON}",
+                            "pullHook": {   
+                              "elementName": "BasicLauncher.events",
+                              "flags": "global",
+                              "event": "onSettingsUpdated"
+                            }
+                          },
+                        "selectedItemBinding":{
+                            "pullFormat":"${BasicLauncher.Settings.UseAgent1}",
+                            "pushFormat":["BasicLauncher:SetAgents[\"","\"]"]
+                        },
+                        "selectedItemBindingProperty":"name",
+                        "itemViewGenerators":{
+                            "default":{
+                              "type":"method",
+                              "object":"BasicLauncher",
+                              "method":"GenerateItemView_Agents"
+                            }
+                        }
+                    },
+                    {
+                        "type":"combobox",
+                        "jsonTemplate":"combobox",
+                        "verticalAlignment":"center",
+                        "xFactor":0.06,
+                        "content":"Layouts",
+                        "backgroundBrush":{
+                            "color":"#FF000032"
+                        },
+                        "itemsBinding": {
+                            "pullFormat": "${BasicLauncher.Layout1.AsJSON}",
+                            "pullHook": {   
+                              "elementName": "BWLUplink.events",
+                              "flags": "global",
+                              "event": "onSettingsUpdated"
+                            }
+                          },
+                        "selectedItemBinding":{
+                            "pullFormat":"${BasicLauncher.Settings.UseLayout1}",
+                            "pushFormat":["BWLUplink:SelectLayout[\"","\"]"]
+                        },
+                        "selectedItemBindingProperty":"layout",
+                        "itemViewGenerators":{
+                            "default":{
+                              "type":"method",
+                              "object":"BasicLauncher",
+                              "method":"GenerateItemView_Layout"
+                            }
+                        }
+                    }
+                ]
+            }
+        }
+    },
+    "elements": [
+        {
+            "type": "panel",
+            "visibility": "hidden",
+            "name": "JMBUplink.events"
+        },
+        {
+            "type": "window",
+            "name": "jmbuplink.window",
+            "jsonTemplate":"window1",
+            "verticalAlignment":"bottom",
+            "widthFactor": 1,
+            "heightFactor": 0.9,
+            "content":{
+                "type":"stackpanel",
+                "orientation":"vertical",
+                "widthFactor":1,
+                "heightFactor":1,
+                "backgroundBrush":{
+                    "color":"#ff006644"
+                },
+                "padding":30,
+                "children":[
+                    {
+                        "type":"textblock",
+                        "text":"Joe Multiboxer: Launcher",
+                        "font":{
+                            "bold":true,
+                            "face":"Verdana",
+                            "heightFactor":2
+                        }
+                    },
+                    {
+                        "type":"stackpanel",
+                        "orientation":"vertical",
+                        "children":[
+                            {
+                                "type":"textblock",
+                                "text":"Highlight a Game from the list below",
+                                "verticalAlignment":"center",
+                                "horizontalContentAlignment":"right",
+                                "margin":[5,15,5,5],                        
+                                "font":{
+                                    "bold":true,
+                                    "face":"Verdana",
+                                    "heightFactor":1.3
+                                }
+                            },
+                            {
+                                "type":"listbox",
+                                "jsonTemplate":"listbox2",
+                                "name":"bl.useGame",
+                                "minSize":[160,25],
+                                "maxSize":[160,150],
+                                "padding":[2,2,2,2],
+                                "borderRounding":1,
+                                "font":{
+                                    "heightFactor":1.2
+                                },
+                                "itemsBinding": {
+                                    "pullFormat": "${BasicLauncher.Games.AsJSON}",
+                                    "pullHook": {   
+                                      "elementName": "BasicLauncher.events",
+                                      "flags": "global",
+                                      "event": "onGamesUpdated"
+                                    }
+                                  },
+                                "selectedItemBinding":{
+                                    "pullFormat":"${BasicLauncher.Settings.UseGame}",
+                                    "pushFormat":["BasicLauncher:SetGame[\"","\"]"]
+                                },
+                                "selectedItemBindingProperty":"display_name",
+                                "itemViewGenerators":{
+                                    "default":{
+                                      "type":"method",
+                                      "object":"BasicLauncher",
+                                      "method":"GenerateItemView_Game"
+                                    }
+                                }
+                            }                            
+                        ]
+                    },                       
+                    {
+                        "type":"stackpanel",
+                        "orientation":"horizontal",                        
+                        "children":[
+                            {
+                                "type":"textbox",
+                                "name":"bl.launchSlots",
+                                "color":"#FFFFFF00",
+                                "minSize":[30,0],
+                                "margin":[8,10,8,10],
+                                "padding":[2,0,2,0],
+                                "borderThickness": 2,
+                                "borderRounding":1,
+                                "borderBrush": {
+                                    "color": "#FFF0F0F0"
+                                },
+                                "font":{
+                                    "face":"Verdana",
+                                    "heightFactor":1.2,
+                                    "color":"#FFFFFF00"
+                                },
+                                "textBinding":{
+                                    "pullFormat":"${BasicLauncher.Settings.LaunchSlots}",
+                                    "pullOnce":true,
+                                    "pushFormat":["BasicLauncher:SetLaunchSlots[","]"],
+                                    "autoPush":false
+                                },
+                                "hooks":{
+                                    "onLostFocus":{
+                                        "flags":"self",
+                                        "event":"lostKeyboardFocus",
+                                        "eventHandler":{
+                                            "type":"forward",
+                                            "event":"pushTextBinding",
+                                            "flags":"self"
+                                        }
+                                    },
+                                    "onLostMouseFocus":{
+                                        "flags":"self",
+                                        "event":"lostMouseFocus",
+                                        "eventHandler":{
+                                            "type":"forward",
+                                            "event":"pushTextBinding",
+                                            "flags":"self"
+                                        }
+                                    }
+                                }
+                            },
+                            { 
+                                "type":"button",
+                                "jsonTemplate":"button",
+                                "horizontalAlignment":"center",
+                                "content":"🚀 Launch",
+                                "font":{
+                                    "bold":true,
+                                    "heightFactor":1.2
+                                },
+                                "eventHandlers":{
+                                    "onPress":{
+                                        "type":"method",
+                                        "object":"BasicLauncher",
+                                        "method":"Launch"
+                                    }
+                                }
+                            }
+                        ]
+                    },
+                    {
+                        "type":"stackpanel",
+                        "color":"#FFF0F0F0",
+                        "orientation":"horizontal",
+                        "margin":[0,0,0,8],
+                        "font":{
+                            "heightFactor":1.2
+                        },
+                        "children":[
+                            {
+                                "type":"button",
+                                "jsonTemplate":"button",
+                                "content":"Apply Window Layout",
+                                "margin":[0,0,8,0],
+                                "eventHandlers":{
+                                    "onPress":{
+                                        "type":"method",
+                                        "object":"BWLUplink",
+                                        "method":"ApplyWindowLayout"
+                                    }
+                                }
+                            },
+                            {
+                                "type":"button",
+                                "jsonTemplate":"button",
+                                "content":"Re-launch Missing",
+                                "margin":[0,0,8,0],
+                                "eventHandlers":{
+                                    "onPress":{
+                                        "type":"method",
+                                        "object":"BasicLauncher",
+                                        "method":"RelaunchMissingSlots"
+                                    }
+                                }
+                            },
+                            {
+                                "type":"textbox",
+                                "name":"bl.launchSlots",
+                                "color":"#FFFFFF00",
+                                "verticalAlignment":"center",
+                                "horizontalAlignment":"center",
+                                "minSize":[160,0],
+                                "padding":[4,0,4,0],
+                                "borderThickness": 2,
+                                "borderRounding":1,
+                                "borderBrush": {
+                                    "color": "#FFF0F0F0"
+                                },
+                                "font":{
+                                    "face":"Verdana",
+                                    "color":"#FFFFFF00"
+                                },
+                                "textBinding":{
+                                    "pullFormat":"Profile: ${BWLUplink.Settings.UseLayout}",
+                                    "pullOnce":false
+                                },
+                                "hooks":{
+                                    "onLostFocus":{
+                                        "flags":"self",
+                                        "event":"lostKeyboardFocus",
+                                        "eventHandler":{
+                                            "type":"forward",
+                                            "event":"pushTextBinding",
+                                            "flags":"self"
+                                        }
+                                    },
+                                    "onLostMouseFocus":{
+                                        "flags":"self",
+                                        "event":"lostMouseFocus",
+                                        "eventHandler":{
+                                            "type":"forward",
+                                            "event":"pushTextBinding",
+                                            "flags":"self"
+                                        }
+                                    }
+                                }
+                            }
+                        ]
+                    },
+                    {
+                        "type":"button",
+                        "jsonTemplate":"button",
+                        "content":"Close All",
+                        "margin":[0,0,8,0],
+                        "font":{
+                            "heightFactor":1.2
+                        },
+                        "eventHandlers":{
+                            "onPress":{
+                                "type":"method",
+                                "object":"BasicLauncher",
+                                "method":"CloseAll"
+                            }
+                        }
+                    },
+                    {
+                        "type":"expander",
+                        "header":"More ...",
+                        "font": {
+                            "heightFactor":1.2
+                        },
+                        "expanded":false,
+                        "content":{
+                            "type":"stackpanel",
+                            "orientation":"vertical",
+                            "font":{
+                                "heightFactor":1.1
+                            },
+                            "children":[ 
+                                {
+                                    "type":"checkbox",
+                                    "content":"Replace previously launched Slots",
+                                    "margin":4,
+                                    "checkedBinding":"BasicLauncher.ReplaceSlots"
+                                },
+                                {
+                                    "type":"stackpanel",
+                                    "orientation":"horizontal",                        
+                                    "children":[
+                                        {
+                                            "type":"button",
+                                            "jsonTemplate":"button",
+                                            "content":"All Fullscreen Windowed",
+                                            "margin":4,
+                                            "eventHandlers":{
+                                                "onPress":{
+                                                    "type":"method",
+                                                    "object":"BasicLauncher",
+                                                    "method":"AllFullScreen"
+                                                }
+                                            }
+                                        },
+                                        {
+                                            "type":"button",
+                                            "jsonTemplate":"button",
+                                            "content":"Reload Launcher",
+                                            "margin":4,
+                                            "eventHandlers":{
+                                                "onPress":{
+                                                    "type":"code",
+                                                    "code":"JMB.Agent[Basic Launcher]:Stop:Start"
+                                                }
+                                            }
+                                        }  
+                                    ]
+                                },
+                                {
+                                    "type":"stackpanel",
+                                    "orientation":"horizontal",                        
+                                            "children":[
+                                        {
+                                            "_dock":"bottom",
+                                            "type":"button",
+                                            "visibility":"visible",
+                                            "jsonTemplate":"button",
+                                            "content":"Show Console",
+                                            "margin":4,
+                                            "eventHandlers":{
+                                                "onPress":{
+                                                    "type":"code",
+                                                    "code":"LGUI2.Element[consoleWindow]:SetVisibility[visible]"
+                                                }
+                                            }
+                                        },
+                                        {
+                                            "_dock":"bottom",
+                                            "type":"button",
+                                            "visibility":"visible",
+                                            "jsonTemplate":"button",
+                                            "content":"Hide Console",
+                                            "margin":4,
+                                            "eventHandlers":{
+                                                "onPress":{
+                                                    "type":"code",
+                                                    "code":"LGUI2.Element[consoleWindow]:SetVisibility[hidden]"
+                                                }
+                                            }
+                                        }  
+                                    ]
+                                },
+                                {
+                                    "type":"stackpanel",
+                                    "orientation":"horizontal",                        
+                                    "children":[
+                                        {
+                                            "type":"button",
+                                            "content":"Show Consoles",
+                                            "jsonTemplate":"button",
+                                            "margin":4,
+                                            "eventHandlers":{
+                                                "onPress":{
+                                                    "type":"method",
+                                                    "object":"JMBUplink",
+                                                    "method":"ShowConsoles"
+                                                }
+                                            }
+                                        },
+                                        {
+                                            "type":"button",
+                                            "jsonTemplate":"button",
+                                            "content":"Hide Consoles",
+                                            "margin":4,
+                                            "eventHandlers":{
+                                                "onPress":{
+                                                    "type":"method",
+                                                    "object":"JMBUplink",
+                                                    "method":"HideConsoles"
+                                                }
+                                            }
+                                        }  
+                                    ]
+                                }
+                            ]
+                        }
+                    }
+                ]
+            }
+        }
+    ]
+}
