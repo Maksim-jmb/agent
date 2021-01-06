@@ -9,3 +9,6 @@ Should be able to switch window layouts on the fly - without restarting.  Just h
 
 Hopefully you can just swap out the Agents folder and this will work - settings.json holds the layouts and LGUI2's: change as needed, and bwl.config is only a test file.
 Agent Window's: if you close a window - reload should bring it back....as of now if you hit RELOAD a ton of times----you might have a ton of windows built up behind the main window!!! I think - just using visible/hide for now to show them - not destroying elements yet.
+
+not sure how far i'll get - but i'll put up a vfx idea agent next.
+
